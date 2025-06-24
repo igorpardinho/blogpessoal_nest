@@ -46,4 +46,10 @@ export class PostagemController {
   update(@Param('id', ParseIntPipe) postagemId: number, @Body() dto: PostagemDtoRequest) {
     return this.postagemService.update(postagemId, dto);
   }
+
+  @Get(':titulo')
+  @HttpCode(HttpStatus.OK)
+  findByTitle(@Param('titulo') titulo: string): Promise<Postagem[]> {
+    return this.postagemService.findByTitle(titulo);
+  }
 }

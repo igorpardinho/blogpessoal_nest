@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { Postagem } from '../entities/postagem.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PostagemDtoRequest } from '../dto/postagem.dto.request';
@@ -52,5 +52,13 @@ export class PostagemService {
     postagem.titulo = dto.titulo;
     postagem.texto = dto.texto;
     return postagem;
+  }
+
+  async findByTitle(titulo: string): Promise<Postagem[]> {
+    return await this.postagemRepository.find({
+      where: {
+        titulo: ILike(`%${titulo}%`),
+      },
+    });
   }
 }

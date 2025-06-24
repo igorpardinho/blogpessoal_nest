@@ -1,21 +1,13 @@
-import { IsNotEmpty } from 'class-validator';
-import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity({ name: 'tb_postagens' })
 export class Postagem {
   @PrimaryGeneratedColumn()
-  id: number;
+  public id!: number;
 
-  @IsNotEmpty()
   @Column({ length: 1000, nullable: false })
-  titulo: string;
+  public titulo: string;
 
-  @IsNotEmpty()
   @Column({ length: 1000, nullable: false })
   texto: string;
 

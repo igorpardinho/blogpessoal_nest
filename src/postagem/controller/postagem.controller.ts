@@ -1,15 +1,20 @@
 import {
   Body,
+  Controller,
   Delete,
   Get,
   HttpCode,
   HttpStatus,
   Param,
+  ParseIntPipe,
   Post,
+  Put,
 } from '@nestjs/common';
 import { PostagemService } from '../services/postagem.service';
 import { Postagem } from '../entities/postagem.entity';
+import { PostagemDtoRequest } from '../dto/postagem.dto.request';
 
+@Controller('/postagens')
 export class PostagemController {
   constructor(private readonly postagemService: PostagemService) {}
 
@@ -21,19 +26,24 @@ export class PostagemController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  save(@Body() postagem: Postagem): Promise<Postagem> {
-    return this.postagemService.save(postagem);
+  save(@Body() dto: PostagemDtoRequest): Promise<Postagem> {
+    return this.postagemService.save(dto);
   }
 
-  @Get('/{id}')
+  @Get(':id')
   @HttpCode(HttpStatus.OK)
-  findById(@Param() postagemId: number): Promise<Postagem | null> {
+  findById(@Param('id', ParseIntPipe) postagemId: number): Promise<Postagem> {
     return this.postagemService.findById(postagemId);
   }
 
-  @Delete('/{id}')
+  @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  remove(postagemId: number): Promise<void> {
+  remove(@Param('id', ParseIntPipe) postagemId: number): Promise<void> {
     return this.postagemService.remove(postagemId);
+  }
+
+  @Put(':id')
+  update(@Param('id', ParseIntPipe) postagemId: number, @Body() dto: PostagemDtoRequest) {
+    return this.postagemService.update(postagemId, dto);
   }
 }

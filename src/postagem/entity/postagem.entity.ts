@@ -1,5 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import { Tema } from '../../tema/entities/tema.entity';
+import { Tema } from '../../tema/entity/tema.entity';
+import { Usuario } from '../../usuario/entity/usuario.entity';
 
 @Entity({ name: 'tb_postagens' })
 export class Postagem {
@@ -19,4 +20,9 @@ export class Postagem {
     onDelete: 'CASCADE',
   })
   tema: Tema;
+
+  @ManyToOne(() => Usuario, (usuario) => usuario.postagem, {
+    onDelete: 'CASCADE',
+  })
+  usuario: Usuario;
 }

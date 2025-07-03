@@ -1,7 +1,7 @@
 import { TemaDtoRequest } from './../dtos/tema.dto.request';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { ILike, Repository } from 'typeorm';
-import { Tema } from '../entities/tema.entity';
+import { Tema } from '../entity/tema.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()

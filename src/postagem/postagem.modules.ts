@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Postagem } from './entities/postagem.entity';
+import { Postagem } from './entity/postagem.entity';
 import { PostagemController } from './controller/postagem.controller';
 import { PostagemService } from './services/postagem.service';
 
